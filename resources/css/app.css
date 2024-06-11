@@ -1,0 +1,184 @@
+/* Base Styles */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar Custom Styles */
+.navbar-custom {
+    background-color: #A6C7E4;
+    padding: 10px 0;
+}
+
+.navbar-custom .navbar-brand img {
+    height: 50px;
+}
+
+.navbar-custom .nav-link {
+    color: #003566;
+    font-weight: bold;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #000;
+}
+
+.cartnav {
+    margin-right: 10px;
+}
+
+.cartnav img {
+    width: 30px;
+}
+
+/* Main Styles */
+main {
+    flex: 1;
+    padding-top: 20px;
+}
+
+/* Card Styles */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #003566;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Form Section Styles */
+.form-section {
+    margin-bottom: 40px;
+}
+
+.form-section h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #001838;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #003566;
+    border-color: #003566;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #002244;
+}
+
+/* Profile Header Styles */
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.profile-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0044cc;
+}
+
+/* Profile Navigation Styles */
+.profile-nav {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.profile-nav-link {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-bottom: 2px solid transparent;
+}
+
+.profile-nav-link:hover,
+.profile-nav-link.active {
+    border-bottom: 2px solid #0044cc;
+}
+
+/* Profile Content Styles */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-picture {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profile-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #0044cc;
+}
+
+.edit-picture-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}

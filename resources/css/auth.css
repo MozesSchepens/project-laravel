@@ -1,0 +1,23 @@
+body {
+    background-color: #f8fafc;
+}
+
+.card {
+    margin-top: 50px;
+}
+
+.card-header {
+    background-color: #3490dc;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #3490dc;
+    border-color: #3490dc;
+}
+
+.btn-link {
+    color: #3490dc;
+}
