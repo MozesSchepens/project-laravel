@@ -162,6 +162,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo e(url('/contact')); ?>">CONTACT</a>
                         </li>
+                        <li><a href="<?php echo e(route('about')); ?>">About</a></li> 
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -208,6 +209,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="resources/js/form-validation.js') }}"></script>
+
 </body>
 </html>
 <?php /**PATH C:\Users\mozes\OneDrive\Bureaublad\project-laravel\resources\views/layouts/app.blade.php ENDPATH**/ ?>

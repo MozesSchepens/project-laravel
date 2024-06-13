@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ShopController,
     ProfileController,
@@ -17,7 +17,6 @@ use App\Http\Controllers\{
     Auth\VerificationController,
     Auth\ConfirmPasswordController,
 };
-use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -50,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update-profile-information', [ProfileController::class, 'updateProfileInformation'])->name('profile.updateProfileInformation');
 });
+
 // Dashboard Route
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -97,3 +97,9 @@ Route::prefix('cart')->group(function () {
     Route::post('/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/pay', [CartController::class, 'pay'])->name('cart.pay');
 });
+
+// About Route
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+

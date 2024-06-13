@@ -130,6 +130,11 @@
         <a href="<?php echo e(url('/shop')); ?>" class="btn btn-primary">Visit the Shop</a>
     </div>
 </div>
+<?php if(Auth::check()): ?>
+    <p>Welcome, <?php echo e(Auth::user()->name); ?>!</p>
+<?php else: ?>
+    <p>Please <a href="<?php echo e(route('login')); ?>">login</a>.</p>
+<?php endif; ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\mozes\OneDrive\Bureaublad\project-laravel\resources\views/home.blade.php ENDPATH**/ ?>

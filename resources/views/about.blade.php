@@ -12,16 +12,14 @@
     </header>
     <main>
         <section>
-            <h2>Project Overview</h2>
-            <p>This project is a web application designed to demonstrate the use of various web development techniques including control structures, XSS protection, CSRF protection, and client-side validation.</p>
-        </section>
-        <section>
-            <h2>Sources</h2>
-            <ul>
-                <li><a href="https://example.com/resource1">Resource 1</a></li>
-                <li><a href="https://example.com/resource2">Resource 2</a></li>
-                <!-- Add more resources as needed -->
-            </ul>
+            <h2>Project beschrijving</h2>
+            <p>Ik was al begonnen aan deze taak zonder github. Heb zojuist al mijn files en codes geupload 
+                Mijn messages heb ik niet echt over nagedacht ik wou het zo snel mogelijk hierop zetten dat dit in orde zou zijn.
+                Om dit project te kunnen maken heb ik gebruik gemaakt van het internet heb ook verschillende keren gevraagd aan medestudenten of ze mij konden helpen. 
+                Ik heb een site gemaakt over mijn favoriete voetbalploeg namelijk Manchester City. Ik heb hier mij gebaseerd op de layout van de officiele club site en op verschillende fan sites 
+                (omdat ik zelf niet zo goed ben in style). Hierin vind je een news page, players page, shop page, faq page en een contact page. Er zijn een aantal zaken dat niet helemaal werken 
+                ik zoals login soms werkt het en soms niet en ik begrijp niet zo goed hoe dat komt.
+            </p
         </section>
     </main>
     <footer>
