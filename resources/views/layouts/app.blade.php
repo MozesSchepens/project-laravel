@@ -162,7 +162,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/contact') }}">CONTACT</a>
                         </li>
-                        <li><a href="{{ route('about') }}">About</a></li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/about') }}">ABOUT</a>
+                        </li> 
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">

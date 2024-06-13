@@ -162,7 +162,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo e(url('/contact')); ?>">CONTACT</a>
                         </li>
-                        <li><a href="<?php echo e(route('about')); ?>">About</a></li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo e(url('/about')); ?>">ABOUT</a>
+                        </li> 
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
