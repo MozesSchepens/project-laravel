@@ -130,4 +130,9 @@
         <a href="{{ url('/shop') }}" class="btn btn-primary">Visit the Shop</a>
     </div>
 </div>
+@if(Auth::check())
+    <p>Welcome, {{ Auth::user()->name }}!</p>
+@else
+    <p>Please <a href="{{ route('login') }}">login</a>.</p>
+@endif
 @endsection
