@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ShopController,
     ProfileController,
@@ -16,7 +15,9 @@ use App\Http\Controllers\{
     HomeController,
     Auth\VerificationController,
     Auth\ConfirmPasswordController,
+    AboutController
 };
+use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -99,7 +100,4 @@ Route::prefix('cart')->group(function () {
 });
 
 // About Route
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
+Route::get('/about', [AboutController::class, 'index'])->name('about');
