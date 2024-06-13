@@ -12801,3 +12801,7 @@ Did you mean one of these?
 [stacktrace]
 #0 {main}
 "} 
+[2024-06-13 09:44:19] local.ERROR: Trait "Illuminate\Foundation\Auth\AuthenticatesUsers" not found {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Trait \"Illuminate\\Foundation\\Auth\\AuthenticatesUsers\" not found at C:\\Users\\mozes\\OneDrive\\Bureaublad\\project-laravel\\app\\Http\\Controllers\\Auth\\LoginController.php:8)
+[stacktrace]
+#0 {main}
+"} 
