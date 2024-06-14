@@ -1,5 +1,5 @@
 <div class="footer bg-light py-4 mt-5">
-    <div class="container">
+<div class="container">
         <div class="row">
             <div class="col-md-4">
                 <h5>About Us</h5>
@@ -8,26 +8,19 @@
             <div class="col-md-4">
                 <h5>Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="<?php echo e(url('/news')); ?>">News</a></li>
-                    <li><a href="<?php echo e(url('/shop')); ?>">Shop</a></li>
-                    <li><a href="<?php echo e(url('/players')); ?>">Players</a></li>
-                    <li><a href="<?php echo e(url('/club')); ?>">Club</a></li>
-                    <li><a href="<?php echo e(url('/faq')); ?>">FAQ</a></li>
-                    <li><a href="<?php echo e(url('/contact')); ?>">Contact</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Players</a></li>
+                    <li><a href="#">Club</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
                 <h5>Contact Us</h5>
-                <address>
-                    Etihad Stadium<br>
-                    Ashton New Rd<br>
-                    Manchester M11 3FF
-                </address>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-12 text-center">
-                <p>&copy; 2024 Manchester City Football Club. All rights reserved.</p>
+                <p>Etihad Stadium, Ashton New Rd, Manchester M11 3FF</p>
+                <p>Email: info@mozes.com</p>
+                <p>Phone: +44 161 444 1894</p>
             </div>
         </div>
     </div>

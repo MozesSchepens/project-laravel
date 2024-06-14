@@ -25,7 +25,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
             <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,60 +34,61 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/news') }}">NEWS</a>
+                    <a class="nav-link" href="<?php echo e(url('/news')); ?>">NEWS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/shop') }}">SHOP</a>
+                    <a class="nav-link" href="<?php echo e(url('/shop')); ?>">SHOP</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/players') }}">PLAYERS</a>
+                    <a class="nav-link" href="<?php echo e(url('/players')); ?>">PLAYERS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/club') }}">CLUB</a>
+                    <a class="nav-link" href="<?php echo e(url('/club')); ?>">CLUB</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/faq') }}">FAQ</a>
+                    <a class="nav-link" href="<?php echo e(url('/faq')); ?>">FAQ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/contact') }}">CONTACT</a>
+                    <a class="nav-link" href="<?php echo e(url('/contact')); ?>">CONTACT</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ url('/about') }}">ABOUT</a>
+                    <a class="nav-link" href="<?php echo e(url('/about')); ?>">ABOUT</a>
                 </li>
 
             </ul>
            
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/cart') }}">cart</a>
+                    <a class="nav-link" href="<?php echo e(url('/cart')); ?>">cart</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">EN</a>
                 </li>
-                @guest
+                <?php if(auth()->guard()->guest()): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
                     </li>
-                    @if (Route::has('register'))
+                    <?php if(Route::has('register')): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
                         </li>
-                    @endif
-                @else
+                    <?php endif; ?>
+                <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/profile') }}">{{ Auth::user()->name }}</a>
+                        <a class="nav-link" href="<?php echo e(url('/profile')); ?>"><?php echo e(Auth::user()->name); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"
+                        <a class="nav-link" href="<?php echo e(route('logout')); ?>"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            <?php echo e(__('Logout')); ?>
+
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
                         </form>
                     </li>
-                @endguest
+                <?php endif; ?>
             </ul>
         </div>
     </div>
@@ -98,3 +99,4 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php /**PATH C:\Users\mozes\OneDrive\Bureaublad\project-laravel\resources\views/layouts/navigation.blade.php ENDPATH**/ ?>

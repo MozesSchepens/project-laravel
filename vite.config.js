@@ -1,4 +1,3 @@
-// vite.config.js
 import {
     defineConfig
 } from 'vite';
@@ -11,13 +10,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    resolve: {
-        alias: {
-            'fsevents': 'fsevents/optional',
-        },
-    },
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    }
 });
