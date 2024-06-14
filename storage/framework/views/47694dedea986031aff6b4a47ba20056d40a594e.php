@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="<?php echo e(mix('css/app.css')); ?>">
     <style>
         body {
             margin: 0;
@@ -32,12 +32,13 @@
 </head>
 <body>
     <div id="app">
-        @include('layouts.navigation')
+        <?php echo $__env->make('layouts.navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <main>
-            @yield('content')
+            <?php echo $__env->yieldContent('content'); ?>
         </main>
-        @include('layouts.footer')
+        <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="<?php echo e(mix('js/app.js')); ?>"></script>
 </body>
 </html>
+<?php /**PATH C:\Users\mozes\OneDrive\Bureaublad\project-laravel\resources\views/layouts/app.blade.php ENDPATH**/ ?>
