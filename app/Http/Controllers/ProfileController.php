@@ -3,69 +3,87 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the profile of the authenticated user.
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function show()
+    // Show profile
+    public function show($id)
     {
-        return view('profile.profile');
+        // Check if the user exists
+        $user = User::find($id);
+        if (!$user) {
+            // If user doesn't exist, redirect to the authenticated user's profile with an error message
+            return redirect()->route('profile.show', Auth::id())->with('error', 'The requested user does not exist.');
+        }
+
+        // Retrieve the user's profile or create it if it doesn't exist
+        $profile = Profile::firstOrCreate(
+            ['user_id' => $id],
+            [
+                'username' => Auth::user()->name, // Use registered username
+                'about_me' => 'Tell us about yourself',
+                'avatar' => null
+            ]
+        );
+
+        return view('profile.show', compact('profile'));
     }
 
-    /**
-     * Show the form for editing the profile.
-     *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function edit()
+    // Edit profile
+    public function edit($id)
     {
-        return view('profile.edit');
+        // Check if the user exists
+        $user = User::find($id);
+        if (!$user) {
+            // If user doesn't exist, redirect to the authenticated user's profile with an error message
+            return redirect()->route('profile.show', Auth::id())->with('error', 'The requested user does not exist.');
+        }
+
+        // Retrieve the user's profile or create it if it doesn't exist
+        $profile = Profile::firstOrCreate(
+            ['user_id' => $id],
+            [
+                'username' => Auth::user()->name, // Use registered username
+                'about_me' => 'Tell us about yourself',
+                'avatar' => null
+            ]
+        );
+
+        return view('profile.edit', compact('profile'));
     }
 
-    /**
-     * Update the profile information of the authenticated user.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateProfileInformation(Request $request)
+    // Update profile
+    public function update(Request $request, $id)
     {
+        // Validate the request data
         $request->validate([
-            'gender' => 'nullable|string',
-            'ethnicity' => 'nullable|string',
-            'preferred_language' => 'nullable|string',
-            'nickname' => 'nullable|string',
-            'fan_since' => 'nullable|string',
-            'favourite_player' => 'nullable|string',
-            'country' => 'nullable|string',
-            'address_line_1' => 'nullable|string',
-            'address_line_2' => 'nullable|string',
-            'address_line_3' => 'nullable|string',
-            'city' => 'nullable|string',
-            'postcode' => 'nullable|string',
+            'username' => 'required|string|max:255|unique:users,name,' . $id,
+            'birthday' => 'nullable|date',
+            'about_me' => 'nullable|string',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $user = Auth::user();
-        $user->update($request->only([
-            'gender',
-            'ethnicity',
-            'preferred_language',
-            'nickname',
-            'fan_since',
-            'favourite_player',
-            'country',
-            'address_line_1',
-            'address_line_2',
-            'address_line_3',
-            'city',
-            'postcode'
-        ]));
+        // Retrieve the profile or fail if it doesn't exist
+        $profile = Profile::where('user_id', $id)->firstOrFail();
 
-        return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
+        // Handle avatar upload
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $profile->avatar = $path;
+        }
+
+        // Update the profile with the new data
+        $profile->update([
+            'username' => $request->username,
+            'birthday' => $request->birthday,
+            'about_me' => $request->about_me,
+            'avatar' => $profile->avatar
+        ]);
+
+        // Redirect back to the profile show page with a success message
+        return redirect()->route('profile.show', $id)->with('success', 'Profile updated successfully!');
     }
 }
