@@ -1,5 +1,3 @@
-<!-- resources/views/admin/about/edit.blade.php -->
-
 @extends('layouts.admin')
 
 @section('content')
@@ -24,24 +22,28 @@
     }
     
 </style>
-    <body>
-        <div class="container">
-        
-            <h1>Project beschrijving</h1>
-            <hr>
-                <p>Ik was al begonnen aan deze taak zonder github. Heb zojuist al mijn files en codes geupload 
-                    Mijn messages heb ik niet echt over nagedacht ik wou het zo snel mogelijk hierop zetten dat dit in orde zou zijn.
-                    Om dit project te kunnen maken heb ik gebruik gemaakt van het internet heb ook verschillende keren gevraagd aan medestudenten of ze mij konden helpen. 
-                    Ik heb een site gemaakt over mijn favoriete voetbalploeg namelijk Manchester City. Ik heb hier mij gebaseerd op de layout van de officiele club site en op verschillende fan sites 
-                    (omdat ik zelf niet zo goed ben in style). Hierin vind je een news page, players page, shop page, faq page en een contact page. Er zijn een aantal zaken dat niet helemaal werken 
-                    ik zoals login soms werkt het en soms niet en ik begrijp niet zo goed hoe dat komt.
-                </p>
-                <p>Hier is de link naar github: <a href="https://github.com/MozesSchepens/project-laravel.git">https://github.com/MozesSchepens/project-laravel.git</p> 
-            </section>
-                <footer>
-                    <p>&copy; 2024 Mozes Schepens. All rights reserved.</p>
-                </footer>
-        </div>
-    
-    </body>
+<body>
+    <div class="container">
+        <h1>Project beschrijving</h1>
+        <hr>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form action="{{ route('admin.about.update') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <textarea name="content" rows="10" class="form-control">{{ old('content', $content) }}</textarea>
+                @error('content')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+        </form>
+        <footer>
+            <p>&copy; 2024 Mozes Schepens. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
 @endsection

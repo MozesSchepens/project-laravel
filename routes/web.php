@@ -131,14 +131,10 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-// Profile routes, accessible only by authenticated users
-Route::middleware('auth')->group(function () {
-    // Show profile
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
-    // Edit profile
     Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Update profile
-    Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Resource routes for news management

@@ -8,7 +8,10 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    // Other methods...
+    // Voeg deze eigenschap toe
+    protected $redirectTo = '/home';
+
+    // Andere methodes...
 
     public function login(Request $request)
     {
@@ -60,6 +63,7 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+
     /**
      * Log the user out of the application.
      *
@@ -76,5 +80,10 @@ class LoginController extends Controller
 
         return redirect('/');
     }
-}
 
+    // Voeg deze methode toe
+    protected function redirectPath()
+    {
+        return $this->redirectTo;
+    }
+}
