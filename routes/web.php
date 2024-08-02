@@ -18,7 +18,7 @@ use App\Http\Controllers\{
     AboutController
 };
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Admin\ShopController as AdminOrderController;
+use App\Http\Controllers\Admin\CartController as AdminCartController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -120,19 +120,6 @@ Route::prefix('cart')->group(function () {
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
-
-Route::get('/', function () {
-    // If the user is authenticated, redirect to the welcome page
-    if (Auth::check()) {
-        return view('home'); // Change 'welcome' to your authenticated user home page
-    }
-    // Otherwise, redirect to the login page
-    return redirect('/login');
-});
-
-// Include other routes related to authentication
-Auth::routes();
-
 // Home route for authenticated users
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -182,30 +169,28 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
 
     // Other admin routes for managing news, FAQs, contacts, products, orders, and forums
     Route::resource('news', App\Http\Controllers\Admin\NewsController::class);
-    Route::resource('faq', App\Http\Controllers\Admin\FAQController::class);
-    Route::resource('faq_categories', App\Http\Controllers\Admin\FAQCategoryController::class);
     Route::resource('contact', App\Http\Controllers\Admin\ContactController::class);
     Route::resource('product', App\Http\Controllers\Admin\ProductController::class);
-    Route::resource('orders', App\Http\Controllers\Admin\CartController::class);
+    Route::resource('carts', App\Http\Controllers\Admin\CartController::class);
 });
 
-// Public order routes, accessible by authenticated users
+// Public cart routes, accessible by authenticated users
 Route::middleware(['auth'])->group(function () {
-    // Create a new order
-    Route::get('/order/create', [CartController::class, 'create'])->name('order.create');
-    // Store a new order
-    Route::post('/order/store', [CartController::class, 'store'])->name('order.store');
-    // Show order details
-    Route::get('/orderdetails/{id}', [CartController::class, 'show'])->name('order.details');
-    // List all orders
-    Route::get('/orders', [CartController::class, 'index'])->name('order.index');
+    // Create a new cart
+    Route::get('/cart/create', [CartController::class, 'create'])->name('cart.create');
+    // Store a new cart
+    Route::post('/cart/shop', [CartController::class, 'shop'])->name('cart.shop');
+    // Show cart details
+    Route::get('/orderdetails/{id}', [CartController::class, 'show'])->name('cart.details');
+    // List all carts
+    Route::get('/carts', [CartController::class, 'index'])->name('cart.index');
 });
 
 // Admin Cart routes, prefixed with 'admin' and accessible only by admins
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // List all carts for admin
     Route::get('/carts', [AdminCartController::class, 'index'])->name('admin.Carts.index');
-    // Show specific order details for admin
+    // Show specific cart details for admin
     Route::get('/carts/{id}', [AdminCartController::class, 'show'])->name('admin.Carts.show');
     // Update Cart status for admin
     Route::patch('/carts/{id}', [AdminCartController::class, 'update'])->name('admin.Carts.update');
@@ -225,27 +210,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::delete('admin/contact/{id}', [AdminContactController::class, 'destroy'])->name('admin.contact.destroy');
 
-});
-
-// Forum management routes, prefixed with 'admin' and accessible only by admins
-Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function () {
-    // List all forums for admin
-    Route::get('/forum', [App\Http\Controllers\Admin\ForumController::class, 'index'])->name('forum.index');
-    // Edit a specific forum for admin
-    Route::get('/forum/{id}/edit', [App\Http\Controllers\Admin\ForumController::class, 'edit'])->name('forum.edit');
-    // Update a specific forum for admin
-    Route::patch('/forum/{id}', [App\Http\Controllers\Admin\ForumController::class, 'update'])->name('forum.update');
-    // Delete a specific forum for admin
-    Route::delete('/forum/{id}', [App\Http\Controllers\Admin\ForumController::class, 'destroy'])->name('forum.destroy');
-    // Delete a specific forum reply for admin
-    Route::delete('/forum/reply/{id}', [App\Http\Controllers\Admin\ForumController::class, 'destroyReply'])->name('forum.reply.destroy');
-});
-
-// Additional forum management routes, accessible by authenticated and admin users
-Route::middleware(['auth', 'admin'])->group(function () {
-    // List all forums for admin
-    Route::get('/admin/forum', [App\Http\Controllers\Admin\ForumController::class, 'index'])->name('admin.forum.index');
-    // other admin routes
 });
 
 // User management routes, prefixed with 'admin' and accessible only by admins
