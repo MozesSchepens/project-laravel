@@ -102,8 +102,11 @@ Route::prefix('club')->group(function () {
 Route::get('/players', [PlayerController::class, 'index'])->name('players.index');
 
 // Contact Routes
+Route::get('/', function () {
+    return view('home');
+});
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
-Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
 
 // FAQ Route
 Route::get('/faq', [FAQController::class, 'index'])->name('faq');
