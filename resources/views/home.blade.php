@@ -47,6 +47,7 @@
         color: #001838;
     }
 </style>
+@extends('layouts.app')
 
 <img src="{{ asset('images/header.png') }}" class="header-image" alt="Manchester City">
 

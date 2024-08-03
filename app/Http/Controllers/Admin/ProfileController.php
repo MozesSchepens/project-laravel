@@ -87,4 +87,3 @@ class ProfileController extends Controller
         return redirect()->route('profile.show', $id)->with('success', 'Profile updated successfully!');
     }
 }
-
