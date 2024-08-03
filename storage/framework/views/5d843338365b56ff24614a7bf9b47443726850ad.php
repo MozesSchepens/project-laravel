@@ -48,6 +48,7 @@
     }
 </style>
 
+
 <img src="<?php echo e(asset('images/header.png')); ?>" class="header-image" alt="Manchester City">
 
 <div class="container">
@@ -133,4 +134,5 @@
 
 <?php $__env->stopSection(); ?>
 
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\mozes\OneDrive\Bureaublad\bw_mozes_schepens_laravel\resources\views/home.blade.php ENDPATH**/ ?>

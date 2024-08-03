@@ -24,7 +24,6 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController;
-
 // Redirect root to login if not authenticated
 use Illuminate\Support\Facades\Route;
 
@@ -60,7 +59,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 });
-
 // News Routes
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/pots', [NewsController::class, 'pots'])->name('news.pots');
