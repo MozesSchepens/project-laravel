@@ -3,25 +3,32 @@
 @section('content')
 <div class="container">
     <h1>Edit Profile</h1>
-    <form action="{{ route('profile.update', $profile->user_id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" value="{{ $profile->username }}" required>
+    <div class="card">
+        <div class="card-header">
+            Edit Profile Details
         </div>
-        <div class="form-group">
-            <label for="birthday">Birthday</label>
-            <input type="date" name="birthday" id="birthday" value="{{ $profile->birthday }}">
+        <div class="card-body">
+            <form method="POST" action="{{ route('profile.update', $profile->user_id) }}" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" value="{{ $profile->username }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Birthday</label>
+                    <input type="date" id="birthday" name="birthday" class="form-control" value="{{ $profile->birthday }}">
+                </div>
+                <div class="form-group">
+                    <label for="about_me">About Me</label>
+                    <textarea id="about_me" name="about_me" class="form-control">{{ $profile->about_me }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="avatar">Avatar</label>
+                    <input type="file" id="avatar" name="avatar" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="about_me">About Me</label>
-            <textarea name="about_me" id="about_me">{{ $profile->about_me }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="avatar">Avatar</label>
-            <input type="file" name="avatar" id="avatar">
-        </div>
-        <button type="submit">Save</button>
-    </form>
+    </div>
 </div>
 @endsection

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ProfileController extends Controller
         $profile = Profile::firstOrCreate(
             ['user_id' => $id],
             [
-                'username' => Auth::user()->name,
+                'username' => $user->name,
                 'about_me' => 'Tell us about yourself',
                 'avatar' => null
             ]
@@ -37,7 +38,7 @@ class ProfileController extends Controller
         $profile = Profile::firstOrCreate(
             ['user_id' => $id],
             [
-                'username' => Auth::user()->name,
+                'username' => $user->name,
                 'about_me' => 'Tell us about yourself',
                 'avatar' => null
             ]
@@ -47,28 +48,46 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request, $id)
+{
+    $request->validate([
+        'username' => 'required|string|max:255|unique:profiles,username,' . $id . ',user_id',
+        'birthday' => 'nullable|date',
+        'about_me' => 'nullable|string',
+        'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $profile = Profile::where('user_id', $id)->first();
+    dd($profile); // Debugging line to ensure profile is correctly loaded
+
+    if (!$profile) {
+        return redirect()->route('profile.edit', $id)->with('error', 'Profile not found.');
+    }
+
+    if ($request->hasFile('avatar')) {
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $profile->avatar = $path;
+    }
+
+    $profile->username = $request->username;
+    $profile->birthday = $request->birthday;
+    $profile->about_me = $request->about_me;
+    $profile->save();
+
+    return redirect()->route('profile.show', $id)->with('success', 'Profile updated successfully!');
+}
+    public function updateProfileInformation(Request $request)
     {
+        $user = Auth::user();
+
         $request->validate([
-            'username' => 'required|string|max:255|unique:users,name,' . $id,
-            'birthday' => 'nullable|date',
-            'about_me' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
 
-        $profile = Profile::where('user_id', $id)->firstOrFail();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
 
-        if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('avatars', 'public');
-            $profile->avatar = $path;
-        }
-
-        $profile->update([
-            'username' => $request->username,
-            'birthday' => $request->birthday,
-            'about_me' => $request->about_me,
-            'avatar' => $profile->avatar
-        ]);
-
-        return redirect()->route('profile.show', $id)->with('success', 'Profile updated successfully!');
+        return redirect()->route('profile.show', $user->id)->with('success', 'Profile updated successfully!');
     }
 }

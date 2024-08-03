@@ -16,15 +16,13 @@ use App\Http\Controllers\{
     HomeController,
     Auth\VerificationController,
     Auth\ConfirmPasswordController,
-    AboutController
+    AboutController,
+    Admin\CartController as AdminCartController,
+    Admin\ContactController as AdminContactController,
+    Admin\NewsController as AdminNewsController,
+    Admin\ProductController as AdminProductController,
+    Admin\UserController
 };
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Admin\CartController as AdminCartController;
-use App\Http\Controllers\Admin\ContactController as AdminContactController;
-use App\Http\Controllers\Admin\NewsController as AdminNewsController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Admin\UserController;
-// Redirect root to login if not authenticated
 use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
@@ -58,7 +56,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/update-profile-information', [ProfileController::class, 'updateProfileInformation'])->name('profile.updateProfileInformation');
 });
+
 // News Routes
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/pots', [NewsController::class, 'pots'])->name('news.pots');
