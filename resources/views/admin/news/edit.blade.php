@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,22 +8,22 @@
         @method('PUT')
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ $news->title }}" required>
+            <input type="text" class="form-control" id="title" name="title" value="{{ $news->title }}" required>
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea name="content" class="form-control" required>{{ $news->content }}</textarea>
+            <textarea class="form-control" id="content" name="content" rows="5" required>{{ $news->content }}</textarea>
         </div>
         <div class="form-group">
-            <label for="cover_image">Cover Image</label>
-            <input type="file" name="cover_image" class="form-control">
-            @if ($news->cover_image)
-                <img src="{{ asset('storage/' . $news->cover_image) }}" alt="Cover Image" style="width: 150px; height: 150px;">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+            @if($news->image)
+                <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}" class="img-fluid mt-2" width="200">
             @endif
         </div>
         <div class="form-group">
             <label for="published_at">Published At</label>
-            <input type="date" name="published_at" class="form-control" value="{{ $news->published_at }}" required>
+            <input type="date" class="form-control" id="published_at" name="published_at" value="{{ $news->published_at->format('Y-m-d') }}" required>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

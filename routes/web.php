@@ -21,7 +21,7 @@ use App\Http\Controllers\{
     Admin\ContactController as AdminContactController,
     Admin\NewsController as AdminNewsController,
     Admin\ProductController as AdminProductController,
-    Admin\UserController
+    Admin\UserController as AdminUserController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -90,8 +90,8 @@ Route::post('contact/submit', [ContactController::class, 'submit'])->name('conta
 
 // Admin Routes
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::resource('users', UserController::class);
     Route::resource('news', AdminNewsController::class);
+    Route::resource('users', AdminUserController::class);
     Route::resource('contact', AdminContactController::class);
     Route::resource('product', AdminProductController::class);
     Route::resource('carts', AdminCartController::class);
@@ -114,10 +114,6 @@ Route::prefix('cart')->group(function () {
 });
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
-
-Route::get('/gamelist', function () {
-    return view('gamelist');
-})->name('gamelist');
 
 // Public cart routes, accessible by authenticated users
 Route::middleware(['auth'])->group(function () {

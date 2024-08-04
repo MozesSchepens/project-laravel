@@ -82,7 +82,7 @@
             <h3>The Decisive Match</h3>
             <p>The decisive match against West Ham United perfectly exemplified City’s strength and determination. The game started with an early lead for City thanks to a goal from their star player. Although West Ham managed to equalize, City remained cool and resolute. Two brilliant goals in the second half secured the final 3-1 victory, clinching the title.</p>
             <h3>Guardiola</h3>
-            <p>Guardiola’s role should not be underestimated. His tactical acumen and ability to get the best out of his players were significant contributors to this achievement. His leadership guided the team through challenging periods and inspired them to reach new heights.</p>
+            <p>Guardiola’s role should not be underestimated. His tactical acumen en ability to get the best out of his players were significant contributors to this achievement. His leadership guided the team through challenging periods and inspired them to reach new heights.</p>
             <h3>An Unforgettable Season</h3>
             <p>This season will go down in the history books as one of the most memorable in the Premier League. Manchester City has not only won four consecutive titles but has also shown what is possible with teamwork, determination, and exceptional skill.</p>
             <p>City fans can be proud of their team, which has once again set the standard in English football. As they celebrate their fourth title, they already look forward to the next challenges and the possibility of continuing their incredible streak.</p>
@@ -92,27 +92,30 @@
 
 <div class="container">
     <h1 class="section-title">More News</h1>
+    @if(Auth::check() && Auth::user()->is_admin)
+    <a href="{{ route('admin.news.create') }}" class="btn btn-primary mb-3">Add News</a>
+    @endif
     <div class="news-grid">
+        @foreach($news as $newsItem)
         <div class="news-item">
-            <img src="{{ asset('images/pots.png') }}" alt="Phil Foden Award" class="img-fluid">
-            <span class="news-date">Published on: June 4, 2024</span>
+            <img src="{{ asset('images/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" class="img-fluid">
+            <span class="news-date">Published on: {{ $newsItem->published_at->format('F j, Y') }}</span>
             <div class="news-info">
-                <span class="news-type">Announcement</span>
-                <h2 class="news-title">Phil Foden named Premier League Player of the Season</h2>
-                <p>Phil Foden has been named the Premier League Player of the Season...</p>
-                <a href="{{ url('/news/pots') }}" class="btn btn-primary">Read more</a>
+                <span class="news-type">{{ $newsItem->type }}</span>
+                <h2 class="news-title">{{ $newsItem->title }}</h2>
+                <p>{{ Str::limit($newsItem->content, 100) }}</p>
+                <a href="{{ route('news.show', $newsItem->id) }}" class="btn btn-primary">Read more</a>
+                @if(Auth::check() && Auth::user()->is_admin)
+                <a href="{{ route('admin.news.edit', $newsItem->id) }}" class="btn btn-warning">Edit</a>
+                <form action="{{ route('admin.news.destroy', $newsItem->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                @endif
             </div>
         </div>
-        <div class="news-item">
-            <img src="{{ asset('images/etihad.png') }}" alt="Stadium Expansion" class="img-fluid">
-            <span class="news-date">Published on: June 3, 2024</span>
-            <div class="news-info">
-                <span class="news-type">Announcement</span>
-                <h2 class="news-title">Manchester City announces new stadium expansion</h2>
-                <p>Manchester City has announced plans to expand the Etihad Stadium...</p>
-                <a href="{{ url('/news/stadium') }}" class="btn btn-primary">Read more</a>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 @endsection

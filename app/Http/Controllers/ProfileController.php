@@ -48,33 +48,37 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'username' => 'required|string|max:255|unique:profiles,username,' . $id . ',user_id',
-        'birthday' => 'nullable|date',
-        'about_me' => 'nullable|string',
-        'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    {
+        $request->validate([
+            'username' => 'required|string|max:255|unique:profiles,username,' . $id . ',user_id',
+            'birthday' => 'nullable|date',
+            'about_me' => 'nullable|string',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    $profile = Profile::where('user_id', $id)->first();
-    dd($profile); // Debugging line to ensure profile is correctly loaded
+        $profile = Profile::where('user_id', $id)->first();
 
-    if (!$profile) {
-        return redirect()->route('profile.edit', $id)->with('error', 'Profile not found.');
+        if (!$profile) {
+            return redirect()->route('profile.edit', $id)->with('error', 'Profile not found.');
+        }
+
+        $updateData = [
+            'username' => $request->username,
+            'birthday' => $request->birthday,
+            'about_me' => $request->about_me,
+        ];
+
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $updateData['avatar'] = $path;
+        }
+
+        // Update the profile without using the save method
+        Profile::where('user_id', $id)->update($updateData);
+
+        return redirect()->route('profile.show', $id)->with('success', 'Profile updated successfully!');
     }
 
-    if ($request->hasFile('avatar')) {
-        $path = $request->file('avatar')->store('avatars', 'public');
-        $profile->avatar = $path;
-    }
-
-    $profile->username = $request->username;
-    $profile->birthday = $request->birthday;
-    $profile->about_me = $request->about_me;
-    $profile->save();
-
-    return redirect()->route('profile.show', $id)->with('success', 'Profile updated successfully!');
-}
     public function updateProfileInformation(Request $request)
     {
         $user = Auth::user();
@@ -84,9 +88,13 @@ class ProfileController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->save();
+        $updateData = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        // Update the user without using the save method
+        User::where('id', $user->id)->update($updateData);
 
         return redirect()->route('profile.show', $user->id)->with('success', 'Profile updated successfully!');
     }
