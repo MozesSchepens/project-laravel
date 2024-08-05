@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,23 +9,6 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'image',
-        'category_id',
-        'user_id'
+        'name', 'description', 'price', 'category', 'image',
     ];
-
-    public function orders()
-{
-    return $this->hasMany(Cart::class);
-}
-
-public function getFormattedPriceAttribute()
-{
-    return '€' . number_format($this->price, 2, ',', '.');
-}
-
-
 }

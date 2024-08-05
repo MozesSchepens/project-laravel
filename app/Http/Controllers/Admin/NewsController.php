@@ -1,44 +1,46 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\News;
 use Illuminate\Http\Request;
+use App\Models\News;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function edit($id)
     {
-        $news = News::all();
-        return view('admin.news.index', compact('news'));
+        $newsItem = News::findOrFail($id);
+        return view('admin.news.edit', compact('newsItem'));
     }
 
-    public function create()
+    public function update(Request $request, $id)
     {
-        return view('admin.news.create');
-    }
-
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
+        $request->validate([
+            'title' => 'required',
             'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'published_at' => 'required|date',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imagePath = $request->file('image')->store('news_images', 'public');
+        $newsItem = News::findOrFail($id);
 
-        News::create([
-            'title' => $validatedData['title'],
-            'content' => $validatedData['content'],
-            'image' => $imagePath,
-            'published_at' => $validatedData['published_at'],
-        ]);
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $newsItem->image = $imageName;
+        }
 
-        return redirect()->route('admin.news.index')->with('success', 'News created successfully.');
+        $newsItem->title = $request->title;
+        $newsItem->content = $request->content;
+        $newsItem->save();
+
+        return redirect()->route('news.show', $newsItem->id)->with('success', 'News updated successfully');
     }
 
-    // andere methodes zoals edit, update, destroy...
+    public function destroy($id)
+    {
+        $newsItem = News::findOrFail($id);
+        $newsItem->delete();
+
+        return redirect()->route('news.index')->with('success', 'News deleted successfully');
+    }
 }
