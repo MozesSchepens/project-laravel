@@ -3,240 +3,106 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
     <h1 class="section-title">Players</h1>
+    <?php if(Auth::check() && Auth::user()->is_admin): ?>
+    <a href="<?php echo e(route('players.create')); ?>" class="btn btn-primary mb-3">Add Player</a>
+    <?php endif; ?>
     
     <h2 class="position-title">Goalkeepers</h2>
     <div class="player-cards">
+        <?php $__currentLoopData = $players->where('position', 'Goalkeeper'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $player): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="player-card">
             <div class="player-card-image">
-                <img src="<?php echo e(asset('images/carson.png')); ?>" alt="Scott Carson">
-                <div class="player-number">33</div>
+                <img src="<?php echo e(asset('images/' . $player->image)); ?>" alt="<?php echo e($player->name); ?>">
+                <div class="player-number"><?php echo e($player->number); ?></div>
             </div>
             <div class="player-card-info">
-                <img src="<?php echo e(asset('images/england.png')); ?>" class="flag" alt="England">
-                <p class="player-name">Scott Carson</p>
+                <img src="<?php echo e(asset('images/' . $player->nationality . '.png')); ?>" class="flag" alt="<?php echo e($player->nationality); ?>">
+                <p class="player-name"><?php echo e($player->name); ?></p>
             </div>
+            <?php if(Auth::check() && Auth::user()->is_admin): ?>
+            <a href="<?php echo e(route('players.edit', $player->id)); ?>" class="btn btn-warning">Edit</a>
+            <form action="<?php echo e(route('players.destroy', $player->id)); ?>" method="POST" style="display:inline;">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <?php endif; ?>
         </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/eddy.png')); ?>" alt="Ederson">
-                <div class="player-number">31</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/brazil.png')); ?>" class="flag" alt="Brazil">
-                <p class="player-name">Ederson</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/ortega.png')); ?>" alt="Stefan Ortega Moreno">
-                <div class="player-number">18</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/duitsland.png')); ?>" class="flag" alt="Germany">
-                <p class="player-name">Stefan Ortega Moreno</p>
-            </div>
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
     
     <h2 class="position-title">Defenders</h2>
     <div class="player-cards">
+        <?php $__currentLoopData = $players->where('position', 'Defender'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $player): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="player-card">
             <div class="player-card-image">
-                <img src="<?php echo e(asset('images/akanji.png')); ?>" alt="Manuel Akanji">
-                <div class="player-number">25</div>
+                <img src="<?php echo e(asset('images/' . $player->image)); ?>" alt="<?php echo e($player->name); ?>">
+                <div class="player-number"><?php echo e($player->number); ?></div>
             </div>
             <div class="player-card-info">
-                <img src="<?php echo e(asset('images/swiss.png')); ?>" class="flag" alt="Switzerland">
-                <p class="player-name">Manuel Akanji</p>
+                <img src="<?php echo e(asset('images/' . $player->nationality . '.png')); ?>" class="flag" alt="<?php echo e($player->nationality); ?>">
+                <p class="player-name"><?php echo e($player->name); ?></p>
             </div>
+            <?php if(Auth::check() && Auth::user()->is_admin): ?>
+            <a href="<?php echo e(route('players.edit', $player->id)); ?>" class="btn btn-warning">Edit</a>
+            <form action="<?php echo e(route('players.destroy', $player->id)); ?>" method="POST" style="display:inline;">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <?php endif; ?>
         </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/ake.png')); ?>" alt="Nathan Aké">
-                <div class="player-number">6</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/nederland.png')); ?>" class="flag" alt="Netherlands">
-                <p class="player-name">Nathan Aké</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/dias.png')); ?>" alt="Ruben Dias">
-                <div class="player-number">3</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/port.png')); ?>" class="flag" alt="Portugal">
-                <p class="player-name">Ruben Dias</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/kyle.png')); ?>" alt="Kyle Walker">
-                <div class="player-number">2</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/england.png')); ?>" class="flag" alt="England">
-                <p class="player-name">Kyle Walker</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/josko.png')); ?>" alt="Josko Gvardiol">
-                <div class="player-number">24</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/croatia.png')); ?>" class="flag" alt="Croatia">
-                <p class="player-name">Josko Gvardiol</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/stones.png')); ?>" alt="John Stones">
-                <div class="player-number">5</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/england.png')); ?>" class="flag" alt="England">
-                <p class="player-name">John Stones</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/rico.png')); ?>" alt="Rico Lewis">
-                <div class="player-number">82</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/england.png')); ?>" class="flag" alt="England">
-                <p class="player-name">Rico Lewis</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/sergio.png')); ?>" alt="Sergio Gomez">
-                <div class="player-number">82</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/spain.png')); ?>" class="flag" alt="Spain">
-                <p class="player-name">Sergio Gomez</p>
-            </div>
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
+
     <h2 class="position-title">Midfielders</h2>
     <div class="player-cards">
+        <?php $__currentLoopData = $players->where('position', 'Midfielder'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $player): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="player-card">
             <div class="player-card-image">
-                <img src="<?php echo e(asset('images/kdb.png')); ?>" alt="Kevin De Bruyne">
-                <div class="player-number">17</div>
+                <img src="<?php echo e(asset('images/' . $player->image)); ?>" alt="<?php echo e($player->name); ?>">
+                <div class="player-number"><?php echo e($player->number); ?></div>
             </div>
             <div class="player-card-info">
-                <img src="<?php echo e(asset('images/belg.png')); ?>" class="flag" alt="België">
-                <p class="player-name">Kevin De Bruyne</p>
+                <img src="<?php echo e(asset('images/' . $player->nationality . '.png')); ?>" class="flag" alt="<?php echo e($player->nationality); ?>">
+                <p class="player-name"><?php echo e($player->name); ?></p>
             </div>
+            <?php if(Auth::check() && Auth::user()->is_admin): ?>
+            <a href="<?php echo e(route('players.edit', $player->id)); ?>" class="btn btn-warning">Edit</a>
+            <form action="<?php echo e(route('players.destroy', $player->id)); ?>" method="POST" style="display:inline;">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <?php endif; ?>
         </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/doku.png')); ?>" alt="Jeremy Doku">
-                <div class="player-number">11</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/belg.png')); ?>" class="flag" alt="België">
-                <p class="player-name">Jeremy Doku</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/phil.png')); ?>" alt="Phil Foden">
-                <div class="player-number">47</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/england.png')); ?>" class="flag" alt="England">
-                <p class="player-name">Phil Foden</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/bernardo.png')); ?>" alt="Bernardo Silva">
-                <div class="player-number">20</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/port.png')); ?>" class="flag" alt="Portugal">
-                <p class="player-name">Bernardo Silva</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/bobb.png')); ?>" alt="Oscar Bobb">
-                <div class="player-number">52</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/nro.png')); ?>" class="flag" alt="Noorwegen">
-                <p class="player-name">Oscar Bobb</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/kov.png')); ?>" alt="Mateo Kovacic">
-                <div class="player-number">8</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/croatia.png')); ?>" class="flag" alt="Croatia">
-                <p class="player-name">Mateo Kovacic</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/jack.png')); ?>" alt="Jack Grealish">
-                <div class="player-number">10</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/england.png')); ?>" class="flag" alt="England">
-                <p class="player-name">Jack Grealish</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/nunes.png')); ?>" alt="Matheus Nunes">
-                <div class="player-number">27</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/port.png')); ?>" class="flag" alt="Portugal">
-                <p class="player-name">Matheus Nunes</p>
-            </div>
-        </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/rodri.png')); ?>" alt="Rodri">
-                <div class="player-number">16</div>
-            </div>
-            <div class="player-card-info">
-                <img src="<?php echo e(asset('images/spain.png')); ?>" class="flag" alt="Spain">
-                <p class="player-name">Rodri</p>
-            </div>
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
+
     <h2 class="position-title">Attackers</h2>
     <div class="player-cards">
+        <?php $__currentLoopData = $players->where('position', 'Attacker'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $player): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="player-card">
             <div class="player-card-image">
-                <img src="<?php echo e(asset('images/erling.png')); ?>" alt="Erling Haaland">
-                <div class="player-number">9</div>
+                <img src="<?php echo e(asset('images/' . $player->image)); ?>" alt="<?php echo e($player->name); ?>">
+                <div class="player-number"><?php echo e($player->number); ?></div>
             </div>
-             <div class="player-card-info">
-                <img src="<?php echo e(asset('images/nro.png')); ?>" class="flag" alt="Noorwegen">
-                <p class="player-name">Erling Haaland</p>
+            <div class="player-card-info">
+                <img src="<?php echo e(asset('images/' . $player->nationality . '.png')); ?>" class="flag" alt="<?php echo e($player->nationality); ?>">
+                <p class="player-name"><?php echo e($player->name); ?></p>
             </div>
+            <?php if(Auth::check() && Auth::user()->is_admin): ?>
+            <a href="<?php echo e(route('players.edit', $player->id)); ?>" class="btn btn-warning">Edit</a>
+            <form action="<?php echo e(route('players.destroy', $player->id)); ?>" method="POST" style="display:inline;">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <?php endif; ?>
         </div>
-        <div class="player-card">
-            <div class="player-card-image">
-                <img src="<?php echo e(asset('images/julian.png')); ?>" alt="Julian Alvarez">
-                <div class="player-number">19</div>
-            </div>
-             <div class="player-card-info">
-                <img src="<?php echo e(asset('images/arg.png')); ?>" class="flag" alt="Argentinië">
-                <p class="player-name">Julian Alvarez</p>
-            </div>
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
+
     <h2 class="position-title">Manager</h2>
     <div class="manager-cards">
         <div class="manager-card">
@@ -247,6 +113,14 @@
                 <img src="<?php echo e(asset('images/spain.png')); ?>" class="flag" alt="Spain">
                 <p class="manager-name">Pep Guardiola</p>
             </div>
+            <?php if(Auth::check() && Auth::user()->is_admin): ?>
+            <a href="<?php echo e(route('players.edit', $manager->id)); ?>" class="btn btn-warning">Edit</a>
+            <form action="<?php echo e(route('players.destroy', $manager->id)); ?>" method="POST" style="display:inline;">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -296,7 +170,7 @@
         right: 10px;
         font-size: 2rem;
         font-weight: bold;
-        color:#003566;
+        color: #003566;
     }
     .player-card-info {
         padding: 10px;
@@ -334,11 +208,9 @@
         width: 100%;
         height: auto;
     }
-   
     .manager-card-info {
         padding: 10px;
     }
-   
     .manager-name {
         font-size: 1rem;
         font-weight: bold;

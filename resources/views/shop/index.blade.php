@@ -72,7 +72,7 @@
         </div>
         <div class="col-md-3">
             <div class="card mb-4 shadow-sm">
-                <img src="{{ asset('images/sports_bag.png') }}" class="card-img-top" alt="Sports bag">
+                <img src="{{ asset('images/bag.png') }}" class="card-img-top" alt="Sports bag">
                 <div class="card-body">
                     <h5 class="card-title">Sports bag</h5>
                     <p class="card-text">$45.00</p>
@@ -98,7 +98,7 @@
         </div>
         <div class="col-md-3">
             <div class="card mb-4 shadow-sm">
-                <img src="{{ asset('images/third_jersey.png') }}" class="card-img-top" alt="Third Jersey">
+                <img src="{{ asset('images/third.png') }}" class="card-img-top" alt="Third Jersey">
                 <div class="card-body">
                     <h5 class="card-title">Third Jersey</h5>
                     <p class="card-text">$79.99</p>

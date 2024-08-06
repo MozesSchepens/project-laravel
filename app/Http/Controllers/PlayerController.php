@@ -1,19 +1,19 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Player;
 
 class PlayerController extends Controller
 {
-    /**
-     * Display a listing of the players.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
-        // Hier kun je de logica toevoegen om spelers op te halen
-        return view('players');
+        $players = Player::all();
+        $manager = Player::where('position', 'Manager')->first();
+        
+        return view('players.index', compact('players', 'manager'));
     }
 }
+

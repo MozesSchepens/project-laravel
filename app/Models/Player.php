@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +8,5 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name', 'position', 'image_url', 'country_flag_url', 'number',
-    ];
+    protected $fillable = ['name', 'position', 'image'];
 }
