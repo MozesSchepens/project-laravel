@@ -22,7 +22,8 @@ use App\Http\Controllers\{
     Admin\NewsController as AdminNewsController,
     Admin\ProductController as AdminProductController,
     Admin\UserController as AdminUserController,
-    Admin\ShopController as AdminShopController // Add this line
+    Admin\PlayerController as AdminPlayerController
+
 };
 use Illuminate\Support\Facades\Route;
 
@@ -61,11 +62,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // News Routes
-
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
-Route::get('/news/pots', [NewsController::class, 'pots'])->name('news.pots');
-Route::get('/news/stadium', [NewsController::class, 'stadium'])->name('news.stadium');  
+Route::get('/news/pots', [NewsController::class, 'show'])->name('news.pots');
+Route::get('/news/stadium', [NewsController::class, 'show'])->name('news.stadium');
+Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
 
 // Shop Routes
 Route::prefix('shop')->group(function () {
@@ -98,7 +99,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('contact', AdminContactController::class);
     Route::resource('product', AdminProductController::class);
     Route::resource('carts', AdminCartController::class);
-    Route::resource('shop', AdminShopController::class); // Add this line
+    Route::resource('players', AdminPlayerController::class);
 });
 
 // Additional Routes

@@ -1,25 +1,8 @@
 <!-- resources/views/news/index.blade.php -->
 
 
-
 <?php $__env->startSection('content'); ?>
 <style>
-    h1 {
-        color: lightblue;
-        font-size: 72px;
-    }
-    h2, h3 {
-        color: navy;
-    }
-    p {
-        color: #001838;
-    }
-    .content img {
-        padding: 5px;
-        display: block;
-        margin: 0 auto;
-        width: 50%;
-    }
     .section-title {
         font-size: 2rem;
         font-weight: bold;
@@ -91,22 +74,21 @@
         </div>
     </div>
 </div>
-
 <div class="container">
-    <h1 class="section-title">More News</h1>
+    <h1 class="section-title">News</h1>
     <?php if(Auth::check() && Auth::user()->is_admin): ?>
     <a href="<?php echo e(route('news.create')); ?>" class="btn btn-primary mb-3">Add News</a>
     <?php endif; ?>
     <div class="news-grid">
         <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $newsItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="news-item">
-            <img src="<?php echo e(asset('images/vinnie.png' . $newsItem->image)); ?>" alt="<?php echo e($newsItem->title); ?>" class="img-fluid">
-            <span class="news-date">Published on: <?php echo e($newsItem->published_at->format('F j, Y')); ?></span>
+            <img src="<?php echo e(asset('images/' . $newsItem->image)); ?>" alt="<?php echo e($newsItem->title); ?>" class="img-fluid">
+            <span class="news-date">Published on: <?php echo e(\Carbon\Carbon::parse($newsItem->published_at)->format('F j, Y')); ?></span>
             <div class="news-info">
                 <span class="news-type"><?php echo e($newsItem->type); ?></span>
                 <h2 class="news-title"><?php echo e($newsItem->title); ?></h2>
                 <p><?php echo e(Str::limit($newsItem->content, 100)); ?></p>
-                <a href="<?php echo e(route('news.show', $newsItem->id)); ?>" class="btn btn-primary">Read more</a>
+                <a href="<?php echo e(route('news.show', ['news' => $newsItem->id])); ?>" class="btn btn-primary">Read more</a>
                 <?php if(Auth::check() && Auth::user()->is_admin): ?>
                 <a href="<?php echo e(route('news.edit', $newsItem->id)); ?>" class="btn btn-warning">Edit</a>
                 <form action="<?php echo e(route('news.destroy', $newsItem->id)); ?>" method="POST" style="display:inline;">
@@ -121,5 +103,7 @@
     </div>
 </div>
 <?php $__env->stopSection(); ?>
+
+
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\mozes\OneDrive\Bureaublad\bw_mozes_schepens_laravel\resources\views/news/index.blade.php ENDPATH**/ ?>

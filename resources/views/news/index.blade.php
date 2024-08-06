@@ -1,25 +1,8 @@
 <!-- resources/views/news/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
 <style>
-    h1 {
-        color: lightblue;
-        font-size: 72px;
-    }
-    h2, h3 {
-        color: navy;
-    }
-    p {
-        color: #001838;
-    }
-    .content img {
-        padding: 5px;
-        display: block;
-        margin: 0 auto;
-        width: 50%;
-    }
     .section-title {
         font-size: 2rem;
         font-weight: bold;
@@ -91,22 +74,21 @@
         </div>
     </div>
 </div>
-
 <div class="container">
-    <h1 class="section-title">More News</h1>
+    <h1 class="section-title">News</h1>
     @if(Auth::check() && Auth::user()->is_admin)
     <a href="{{ route('news.create') }}" class="btn btn-primary mb-3">Add News</a>
     @endif
     <div class="news-grid">
         @foreach($news as $newsItem)
         <div class="news-item">
-            <img src="{{ asset('images/vinnie.png' . $newsItem->image) }}" alt="{{ $newsItem->title }}" class="img-fluid">
-            <span class="news-date">Published on: {{ $newsItem->published_at->format('F j, Y') }}</span>
+            <img src="{{ asset('images/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" class="img-fluid">
+            <span class="news-date">Published on: {{ \Carbon\Carbon::parse($newsItem->published_at)->format('F j, Y') }}</span>
             <div class="news-info">
                 <span class="news-type">{{ $newsItem->type }}</span>
                 <h2 class="news-title">{{ $newsItem->title }}</h2>
                 <p>{{ Str::limit($newsItem->content, 100) }}</p>
-                <a href="{{ route('news.show', $newsItem->id) }}" class="btn btn-primary">Read more</a>
+                <a href="{{ route('news.show', ['news' => $newsItem->id]) }}" class="btn btn-primary">Read more</a>
                 @if(Auth::check() && Auth::user()->is_admin)
                 <a href="{{ route('news.edit', $newsItem->id) }}" class="btn btn-warning">Edit</a>
                 <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST" style="display:inline;">
@@ -121,3 +103,5 @@
     </div>
 </div>
 @endsection
+
+

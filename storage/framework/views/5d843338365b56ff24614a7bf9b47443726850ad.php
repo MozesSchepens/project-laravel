@@ -48,7 +48,6 @@
     }
 </style>
 
-
 <img src="<?php echo e(asset('images/header.png')); ?>" class="header-image" alt="Manchester City">
 
 <div class="container">
@@ -64,7 +63,7 @@
                     <div class="card-body">
                         <h5 class="card-title">City wins their fourth consecutive Premier League title</h5>
                         <p class="card-text">Manchester City have won the Premier League title for the 2023-2024 season...</p>
-                        <a href="<?php echo e(url('/news')); ?>" class="btn btn-primary">Read more</a>
+                        <a href="<?php echo e(route('news.show', ['news' => 1])); ?>" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
@@ -74,7 +73,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Phil Foden named Premier League Player of the Season</h5>
                         <p class="card-text">Phil Foden has been named the Premier League Player of the Season...</p>
-                        <a href="<?php echo e(url('/news/pots')); ?>" class="btn btn-primary">Read more</a>
+                        <a href="<?php echo e(route('news.show', ['news' => 2])); ?>" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +83,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Manchester City announces new stadium expansion</h5>
                         <p class="card-text">Manchester City has announced plans to expand the Etihad Stadium...</p>
-                        <a href="<?php echo e(url('/news')); ?>" class="btn btn-primary">Read more</a>
+                        <a href="<?php echo e(route('news.show', ['news' => 3])); ?>" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
@@ -134,5 +133,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\mozes\OneDrive\Bureaublad\bw_mozes_schepens_laravel\resources\views/home.blade.php ENDPATH**/ ?>

@@ -47,7 +47,6 @@
         color: #001838;
     }
 </style>
-@extends('layouts.app')
 
 <img src="{{ asset('images/header.png') }}" class="header-image" alt="Manchester City">
 
@@ -64,7 +63,7 @@
                     <div class="card-body">
                         <h5 class="card-title">City wins their fourth consecutive Premier League title</h5>
                         <p class="card-text">Manchester City have won the Premier League title for the 2023-2024 season...</p>
-                        <a href="{{ url('/news') }}" class="btn btn-primary">Read more</a>
+                        <a href="{{ route('news.show', ['news' => 1]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
@@ -74,7 +73,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Phil Foden named Premier League Player of the Season</h5>
                         <p class="card-text">Phil Foden has been named the Premier League Player of the Season...</p>
-                        <a href="{{ url('/news/pots') }}" class="btn btn-primary">Read more</a>
+                        <a href="{{ route('news.show', ['news' => 2]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +83,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Manchester City announces new stadium expansion</h5>
                         <p class="card-text">Manchester City has announced plans to expand the Etihad Stadium...</p>
-                        <a href="{{ url('/news') }}" class="btn btn-primary">Read more</a>
+                        <a href="{{ route('news.show', ['news' => 3]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>
             </div>
